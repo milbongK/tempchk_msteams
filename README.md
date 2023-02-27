@@ -1,7 +1,7 @@
 # tempchk_msteams
 
 [온습도계 세팅 가이드]
-
+<br>
 1. 아래의 패키지를 우선 설치 한다.
 #python3 설치
 sudo apt-get install python3-pip
