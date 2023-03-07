@@ -5,9 +5,16 @@
 1. 아래의 패키지를 우선 설치 한다.<br>
 #python3 설치<br>
 sudo apt-get install python3-pip<br>
+apt-get update
+
 <br>
 #라즈베리파이 온습도 센서 라이브러리 설치<br>
 sudo pip3 install Adafruit_DHT<br>
+sudo python3 -m pip install --upgrade pip setuptools wheel
+sudo pip3 install pymsteams
+
+--202303-07 위의 명령어로 안먹혀서. 확인 결과 아래의 옵션값 추가 시 잘됨.
+sudo pip3 install Adafruit_DHT --install-option="--force-pi"
 <br>
 2. 파이썬 파일을 이동한다. (tempchk와 livechk 두가지 각각 생성)<br>
 <br>
