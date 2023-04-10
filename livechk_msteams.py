@@ -2,10 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import pymsteams
+import pymysql
 import smtplib
 from email.mime.text import MIMEText
 import Adafruit_DHT as dht
 import time
+
+today=time.strftime('%y-%m-%d %H:%M:%S')
+hum,temp=dht.read_retry(dht.DHT22,2)
+host = "Server IP, DNS"
+port = "3306"
+database = "sensor_data"
+username = "DBID"
+password = "DBpasswd"
 
 today=time.strftime('%y-%m-%d %H:%M:%S')
 hum,temp=dht.read_retry(dht.DHT22,2)
@@ -31,7 +40,20 @@ def livechk_send_msteams():
     my_message.text(msg2)
     my_message.send()
 
+def livechk_send_sql():
+    db = pymysql.connect(host=host, user=username, passwd=password, db=database)
+    cursor = db.cursor()
 
+    # 데이터 삽입
+    query = f"INSERT INTO temperature (temperature, humidity, timestamp) VALUE ({temp}, {hum}, '{datetime.now()}')"
+    cursor.execute(query)
+    db.commit()
+    # 연결 닫기
+    db.close()
+
+    
+    
 #livechk_send_mail 함수 호출
 #livechk_send_mail()
 livechk_send_msteams()
+livechk_send_sql()
